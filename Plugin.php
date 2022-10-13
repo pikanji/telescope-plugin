@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -87,14 +87,18 @@ class Plugin extends PluginBase
      */
     public function registerNavigation(): array
     {
-        return [
-            'telescope' => [
-                'label' => 'Telescope',
-                'url' => Backend::url('rubium/telescope/telescope'),
-                'iconSvg' => '/plugins/rubium/telescope/assets/telescope.svg',
-                'order' => 500,
-                'permissions' => ['rubium.telescope.access'],
-            ]
-        ];
+        if (config('rubium.telescope::telescope.enabled')) {
+            return [
+                'telescope' => [
+                    'label' => 'Telescope',
+                    'url' => Backend::url('rubium/telescope/telescope'),
+                    'iconSvg' => '/plugins/rubium/telescope/assets/telescope.svg',
+                    'order' => 500,
+                    'permissions' => ['rubium.telescope.access'],
+                ]
+            ];
+        } else {
+            return [];
+        }
     }
 }
